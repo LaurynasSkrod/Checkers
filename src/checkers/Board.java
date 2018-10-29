@@ -59,8 +59,9 @@ public class Board {
        int nowB = scanner.nextInt();
        System.out.println("Iveskite galines saskes koordinates. Pvz: 2 3");
        int newA = scanner.nextInt();
-       int newB = scanner.nextInt(); 
-       //tikrina ar paeita su X saske
+       int newB = scanner.nextInt();
+       if(nowA<9 && nowB<9 && newA<9 && newB<9 && nowA>0 && nowB>0 && newA>0 && newB>0) {
+
        if("X".equals(board[nowA*2][nowB*2])){
     	   if("O".equals(board[newA*2][newB*2])) {
     		   if(nowA<newA && nowB<newB && " ".equals(board[newA*2+2][newB*2+2])) {		   
@@ -139,7 +140,10 @@ public class Board {
        else {
     	   System.out.println("Blogai ivestos koordinates ");
        }
-       
+       } 
+       else {
+    	   System.out.println("Blogai ivestos koordinates ");
+       }
        
    }
    public Scanner scanner = new Scanner(System.in);
