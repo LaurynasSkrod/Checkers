@@ -5,148 +5,85 @@
  */
 package checkers;
 
-import java.util.Scanner;
+import checkers.model.Move;
 
-/**
- *
- * @author Lauris
- */
 public class Board {
-    Board(){};
-    String board[][] = new String [][]{
-        {" ","|","1","|","2","|","3","|","4","|","5","|","6","|","7","|","8","|"},
-        {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"},
-        {"1","|"," ","|","X","|"," ","|","X","|"," ","|","X","|"," ","|","X","|"},
-        {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"},
-        {"2","|","X","|"," ","|","X","|"," ","|","X","|"," ","|","X","|"," ","|"},
-        {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"},
-        {"3","|"," ","|","X","|"," ","|","X","|"," ","|","X","|"," ","|","X","|"},
-        {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"},
-        {"4","|"," ","|"," ","|"," ","|"," ","|"," ","|"," ","|"," ","|"," ","|"},
-        {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"},
-        {"5","|"," ","|"," ","|"," ","|"," ","|"," ","|"," ","|"," ","|"," ","|"},
-        {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"},
-        {"6","|","O","|"," ","|","O","|"," ","|","O","|"," ","|","O","|"," ","|"},
-        {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"},
-        {"7","|"," ","|","O","|"," ","|","O","|"," ","|","O","|"," ","|","O","|"},
-        {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"},
-        {"8","|","O","|"," ","|","O","|"," ","|","O","|"," ","|","O","|"," ","|"},
-      
-        
+    private static Board instance;
+    public String[][] board = new String[][]{
+            {" ", "|", "1", "|", "2", "|", "3", "|", "4", "|", "5", "|", "6", "|", "7", "|", "8", "|"},
+            {"-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+            {"1", "|", " ", "|", "X", "|", " ", "|", "X", "|", " ", "|", "X", "|", " ", "|", "X", "|"},
+            {"-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+            {"2", "|", "X", "|", " ", "|", "X", "|", " ", "|", "X", "|", " ", "|", "X", "|", " ", "|"},
+            {"-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+            {"3", "|", " ", "|", "X", "|", " ", "|", "X", "|", " ", "|", "X", "|", " ", "|", "X", "|"},
+            {"-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+            {"4", "|", " ", "|", " ", "|", " ", "|", " ", "|", " ", "|", " ", "|", " ", "|", " ", "|"},
+            {"-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+            {"5", "|", " ", "|", " ", "|", " ", "|", " ", "|", " ", "|", " ", "|", " ", "|", " ", "|"},
+            {"-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+            {"6", "|", "O", "|", " ", "|", "O", "|", " ", "|", "O", "|", " ", "|", "O", "|", " ", "|"},
+            {"-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+            {"7", "|", " ", "|", "O", "|", " ", "|", "O", "|", " ", "|", "O", "|", " ", "|", "O", "|"},
+            {"-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+            {"8", "|", "O", "|", " ", "|", "O", "|", " ", "|", "O", "|", " ", "|", "O", "|", " ", "|"},
     };
-    public int getHeight(){
+
+    private Board() {
+    }
+
+    public String[][] getBoard() {
+        return board;
+    }
+
+    public static Board getInstance() {
+        if (instance == null) {
+            instance = new Board();
+        }
+        return instance;
+    }
+
+    public int getHeight() {
         return board.length;
     }
-    public int getWidth(){
+
+    public int getWidth() {
         return board[0].length;
     }
-    public void render(){
-       for(int i = 0; i < getHeight(); i++){
-           for(int j = 0; j < getWidth(); j++){
-               System.out.print(board[i][j]);
-              
-           }
-           System.out.println();
-           
-            
-        }
-       System.out.println();System.out.println();System.out.println();System.out.println();
-   }
- 
-   public void move(){
-	   System.out.println("Iveskite pradines saskes koordinates. Pvz: 1 2");
-       int nowA = scanner.nextInt();
-       int nowB = scanner.nextInt();
-       System.out.println("Iveskite galines saskes koordinates. Pvz: 2 3");
-       int newA = scanner.nextInt();
-       int newB = scanner.nextInt();
-       if(nowA<9 && nowB<9 && newA<9 && newB<9 && nowA>0 && nowB>0 && newA>0 && newB>0) {
 
-       if("X".equals(board[nowA*2][nowB*2])){
-    	   if("O".equals(board[newA*2][newB*2])) {
-    		   if(nowA<newA && nowB<newB && " ".equals(board[newA*2+2][newB*2+2])) {		   
-    				   board[newA*2+2][newB*2+2] = "X"; 
-    				   board[nowA*2][nowB*2] = " ";
-    	    		   board[newA*2][newB*2] = " ";
-    		   }
-    		   else  if(nowA>newA && nowB>newB && " ".equals(board[newA*2-2][newB*2-2])) {    			   
-    				   board[newA*2-2][newB*2-2] = "X"; 
-    				   board[nowA*2][nowB*2] = " ";
-    	    		   board[newA*2][newB*2] = " ";
-     		   }
-    		   else  if(nowA<newA && nowB>newB && " ".equals(board[newA*2+2][newB*2-2])) {  			   
-    				   board[newA*2+2][newB*2-2] = "X"; 
-    				   board[nowA*2][nowB*2] = " ";
-    	    		   board[newA*2][newB*2] = " ";
-      		   }
-    		   else  if(nowA>newA && nowB<newB && " ".equals(board[newA*2-2][newB*2+2])) {  			 
-    				   board[newA*2-2][newB*2+2] = "X";  
-    				   board[nowA*2][nowB*2] = " ";
-    	    		   board[newA*2][newB*2] = " ";
-       		   }
-    		   else {
-    			   System.out.println("blogai ivestos koordinates");
-    		   }
-    		   
-    	   }
-    	   else if(" ".equals(board[newA*2][newB*2])) {
-    		 board[nowA*2][nowB*2] = " ";
-             board[newA*2][newB*2] = "X"; 
-    	   }
-    	   else {
-    		   System.out.println("Blogai ivestos koordinates");
-    	   }
-             
-            
-             render();
-       }
-       else if ("O".equals(board[nowA*2][nowB*2])){
-    	   if("X".equals(board[newA*2][newB*2])) {
-    		   if(nowA<newA && nowB<newB && " ".equals(board[newA*2+2][newB*2+2])) {		   
-    				   board[newA*2+2][newB*2+2] = "O";  
-    				   board[nowA*2][nowB*2] = " ";
-    	    		   board[newA*2][newB*2] = " ";
-    		   }
-    		   else  if(nowA>newA && nowB>newB && " ".equals(board[newA*2-2][newB*2-2])) {    			   
-    				   board[newA*2-2][newB*2-2] = "O"; 
-    				   board[nowA*2][nowB*2] = " ";
-    	    		   board[newA*2][newB*2] = " ";
-     		   }
-    		   else  if(nowA<newA && nowB>newB && " ".equals(board[newA*2+2][newB*2-2])) {  			   
-    				   board[newA*2+2][newB*2-2] = "O";
-    				   board[nowA*2][nowB*2] = " ";
-    	    		   board[newA*2][newB*2] = " ";
-      		   }
-    		   else  if(nowA>newA && nowB<newB && " ".equals(board[newA*2-2][newB*2+2])) {  			 
-    				   board[newA*2-2][newB*2+2] = "O";    
-    				   board[nowA*2][nowB*2] = " ";
-    	    		   board[newA*2][newB*2] = " ";
-       		   }
-    		   else {
-    			   System.out.println("blogai ivestos koordinates");
-    		   }
-    		   
-    	   }
-    	   else if(" ".equals(board[newA*2][newB*2])) {
-    		 board[nowA*2][nowB*2] = " ";
-             board[newA*2][newB*2] = "O"; 
-    	   }
-    	   else {
-    		   System.out.println("Blogai ivestos koordinates");
-    	   }
-            
-             render();
-       }
-       else {
-    	   System.out.println("Blogai ivestos koordinates ");
-       }
-       } 
-       else {
-    	   System.out.println("Blogai ivestos koordinates ");
-       }
-       
-   }
-   public Scanner scanner = new Scanner(System.in);
-     
-       
+    public void clearJumpUnit(Move move) {
+        board[move.getNowA() * 2][move.getNowB() * 2] = " ";
+        board[move.getNewA() * 2][move.getNewB() * 2] = " ";
+    }
+
+    public void clearMoveUnit(Move move) {
+        board[move.getNowA() * 2][move.getNowB() * 2] = " ";
+    }
+
+    public int countOUnits() {
+        int countO = 0;
+        for (int i = 0; i < getHeight(); i++) {
+            for (int j = 0; j < getWidth(); j++) {
+                if (board[i][j].equals("O") || board[i][j].equals("Q")) {
+                    countO++;
+                }
+            }
+
+        }
+        return countO;
+    }
+
+    public int countXUnits() {
+        int countX = 0;
+        for (int i = 0; i < getHeight(); i++) {
+            for (int j = 0; j < getWidth(); j++) {
+                if (board[i][j].equals("X") || board[i][j].equals("K")) {
+                    countX++;
+                }
+
+            }
+
+        }
+        return countX;
+    }
 }
